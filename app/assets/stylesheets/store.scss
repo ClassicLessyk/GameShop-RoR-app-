@@ -32,5 +32,20 @@
     font-size: 1.414em;
     }
     }
+    form, div {
+         display: inline;
+         }
+         input[type="submit"] {
+         background-color: rgb(45, 192, 218);
+         border-radius: 0.354em;
+         border: solid thin rgb(12, 29, 255);
+         color: white;
+         font-size: 1em;
+         padding: 0.354em 1em;
+         }
+         input[type="submit"]:hover {
+         background-color: rgb(0, 4, 63);
+         }
+        
     }
 }
