@@ -18,7 +18,16 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
   end
-
+  def who_bought
+    @product = Product.find(params[:id])
+    @latest_order = @product.orders.order(:updated_at).last
+    if stale?(@latest_order)
+    respond_to do |format|
+    format.atom
+    end
+    end
+    end
+    
   # POST /products or /products.json
   def create
     @product = Product.new(product_params)
