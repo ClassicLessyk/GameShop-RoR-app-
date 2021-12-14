@@ -1,7 +1,18 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  config.action_mailer.default_url_options = { :host => "smtp.gmail.com" }
   # Settings specified here will take precedence over those in config/application.rb.
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address: "smtp.gmail.com",
+      port: 587,
+      domain: "gmail.com",
+      authentication: "plain",
+      user_name: "sanyaalexander0@gmail.com",
+      password: "Bigtime2001",
+      enable_starttls_auto: true
+  }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
