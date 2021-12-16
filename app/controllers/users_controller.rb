@@ -1,14 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  after_destroy :ensure_an_admin_remains  
-  class Error < StandardError
-  end
-  private
-  def ensure_an_admin_remains
-  if User.count.zero?
-  raise Error.new "Can't delete last user"
-  end
-  end
+  
 
 
   # GET /users or /users.json
@@ -67,15 +59,9 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  class User < ApplicationRecord
-    validates :name, presence: true, uniqueness: true
-    has_secure_password
-    
-  end
-  
-
-  
-  
+  rescue_from 'User::Error' do |exception|
+    redirect_to users_url, notice: exception.message
+    end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
